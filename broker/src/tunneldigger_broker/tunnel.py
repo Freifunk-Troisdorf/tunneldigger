@@ -223,7 +223,7 @@ class Tunnel(protocol.HandshakeProtocolMixin, network.Pollable):
             self.pmtu_probe_iteration = 0
             self.pmtu_probe_size = None
             self.pmtu_probe_acked_mtu = 0
-            self.create_timer(self.pmtu_discovery, timeout=random.randrange(500, 700))
+            # self.create_timer(self.pmtu_discovery, timeout=random.randrange(500, 700))
             return
 
         self.pmtu_probe_size = PMTU_PROBE_SIZES[self.pmtu_probe_iteration / PMTU_PROBE_REPEATS]
