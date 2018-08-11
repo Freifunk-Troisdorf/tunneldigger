@@ -3,6 +3,7 @@ TUNNEL_ID="$1"
 INTERFACE="$3"
 OLD_MTU="$4"
 NEW_MTU="$5"
+BATDEV="$7"
 
 . scripts/bridge_functions.sh
 
