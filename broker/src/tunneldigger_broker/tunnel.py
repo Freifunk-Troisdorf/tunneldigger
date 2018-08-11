@@ -52,7 +52,7 @@ class Tunnel(protocol.HandshakeProtocolMixin, network.Pollable):
     A tunnel descriptor.
     """
 
-    def __init__(self, broker, address, endpoint, uuid, tunnel_id, remote_tunnel_id, pmtu_fixed, client_features):
+    def __init__(self, broker, address, endpoint, uuid, tunnel_id, remote_tunnel_id, pmtu_fixed, client_features, batdev):
         """
         Construct a tunnel.
 
@@ -69,6 +69,7 @@ class Tunnel(protocol.HandshakeProtocolMixin, network.Pollable):
         self.socket.setsockopt(socket.IPPROTO_IP, IP_MTU_DISCOVER, IP_PMTUDISC_PROBE)
 
         self.broker = broker
+        self.batdev = batdev
         self.endpoint = endpoint
         self.uuid = uuid
         self.client_features = client_features
@@ -209,6 +210,7 @@ class Tunnel(protocol.HandshakeProtocolMixin, network.Pollable):
             self.endpoint[1],
             self.address[1],
             self.uuid,
+            self.batdev,
         )
 
     def pmtu_discovery(self):
@@ -270,6 +272,7 @@ class Tunnel(protocol.HandshakeProtocolMixin, network.Pollable):
                 old_tunnel_mtu,
                 self.tunnel_mtu,
                 self.uuid,
+                self.batdev,
             )
 
     def keepalive(self):
@@ -321,6 +324,7 @@ class Tunnel(protocol.HandshakeProtocolMixin, network.Pollable):
             self.endpoint[1],
             self.address[1],
             self.uuid,
+            self.batdev,
         )
 
         # Transmit error message so the other end can tear down the tunnel

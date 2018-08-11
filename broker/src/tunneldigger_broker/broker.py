@@ -28,6 +28,7 @@ class TunnelManager(object):
         connection_rate_limit,
         pmtu_fixed,
         log_ip_addresses,
+        batdev,
     ):
         """
         Constructs a tunnel manager.
@@ -51,6 +52,7 @@ class TunnelManager(object):
         self.pmtu_fixed = pmtu_fixed
         self.require_unique_session_id = False
         self.log_ip_addresses = log_ip_addresses
+        self.batdev = batdev
 
     def report_usage(self, client_features):
         """
@@ -110,6 +112,7 @@ class TunnelManager(object):
                 remote_tunnel_id=remote_tunnel_id,
                 pmtu_fixed=self.pmtu_fixed,
                 client_features=client_features,
+                batdev=self.batdev,
             )
             tunnel.register(broker.event_loop)
             tunnel.setup_tunnel()
