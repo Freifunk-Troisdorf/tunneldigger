@@ -2,6 +2,7 @@
 ; IP address the broker will listen and accept tunnels on
 address=172.31.1.100
 ; Ports where the broker will listen on
+; Aktuell ist es der fastd-port dieser Hood +10000
 port=20001
 ; Interface with that IP address
 interface=ens3
@@ -12,6 +13,8 @@ max_tunnels=100
 ; can keep using the control port.
 port_base=10000
 ; Tunnel id base
+; Diesen Wert um max_tunnels des "vorherigen"  Brokers erhöhen
+; Die Ports werden aus port_base + tunnel_id_base + n gebildet (n Element aus 0 - max_tunnel)
 tunnel_id_base=100
 ; Namespace (for running multiple brokers); note that you must also
 ; configure disjunct ports, and tunnel identifiers in order for
