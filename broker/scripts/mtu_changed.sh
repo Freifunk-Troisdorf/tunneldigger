@@ -5,15 +5,15 @@ OLD_MTU="$4"
 NEW_MTU="$5"
 BATDEV="$7"
 
-. scripts/bridge_functions.sh
+. /srv/tunneldigger/tunneldigger/broker/scripts/bridge_functions
 
 # Remove interface from old bridge
-brctl delif digger${OLD_MTU} $INTERFACE
+brctl delif br-${BATDEV}-${OLD_MTU} $INTERFACE
 
 # Change interface MTU
 ip link set dev $INTERFACE mtu $NEW_MTU
 
 # Add interface to new bridge
-ensure_bridge digger${NEW_MTU}
-brctl addif digger${NEW_MTU} $INTERFACE
+ensure_bridge br-${BATDEV}-${NEW_MTU}
+brctl addif br-${BATDEV}-${NEW_MTU} $INTERFACE
 
